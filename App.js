@@ -13,7 +13,7 @@ export default function App() {
         <View style={styles.items}>
           <Task text={'Task 1'} />
           <Task text={'Task 2'} />
-          <Task text={'Task 3'} />
+          <Task text={'Task '} />
 
         </View>
 
