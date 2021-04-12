@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
-import { SafeAreaView, ScrollView, TouchableHighlight } from 'react-native';
+import { SafeAreaView, ScrollView } from 'react-native';
 import {
   KeyboardAvoidingView, Platform, StyleSheet,
   Text, View, TextInput,
@@ -53,11 +53,11 @@ export default function App() {
           value={task}
           onChangeText={text => setTask(text)}
         />
-        <TouchableHighlight onPress={() => handleAddTask()}>
+        <TouchableOpacity onPress={() => handleAddTask()}>
           <View style={styles.addWrapper}>
             <Text style={styles.addText}> + </Text>
           </View>
-        </TouchableHighlight>
+        </TouchableOpacity>
       </KeyboardAvoidingView>
     </SafeAreaView >
   );
