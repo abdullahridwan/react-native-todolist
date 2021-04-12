@@ -1,9 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState } from 'react';
+import { SafeAreaView, ScrollView } from 'react-native';
 import {
   KeyboardAvoidingView, Platform, StyleSheet,
   Text, View, TextInput,
-  TouchableOpacity, paddingHorizontal, paddingVertical, Keyboard
+  TouchableOpacity, Keyboard
 } from 'react-native';
 
 
@@ -29,44 +30,36 @@ export default function App() {
 
 
   return (
-    <View style={styles.container}>
-      <View style={styles.tasksWrapper}>
-        <Text style={styles.sectionTitle}> Today's Tasks </Text>
-        <View style={styles.items}>
-          {
-            taskItems.map((item, index) => {
-              return (
-                <TouchableOpacity key={index} onPress={() => completeTask(index)}>
-                  <Task text={item} />
-                </TouchableOpacity>
-              )
-            })
-          }
-        </View>
-      </View>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.sectionTitle}> Today's Tasks </Text>
 
+      <ScrollView style={styles.tasksWrapper}>
+        {
+          taskItems.map((item, index) => {
+            return (
+              <TouchableOpacity key={index} onPress={() => completeTask(index)}>
+                <Task text={item} />
+              </TouchableOpacity>
+            )
+          })
+        }
+      </ScrollView>
       <KeyboardAvoidingView
         behavior={Platform.OS == "ios" ? "padding" : "height"}
         style={styles.writeTaskWrapper}>
-
         <TextInput
           style={styles.input}
           placeholder={'Write a task'}
           value={task}
           onChangeText={text => setTask(text)}
         />
-
         <TouchableOpacity onPress={() => handleAddTask()}>
           <View style={styles.addWrapper}>
             <Text style={styles.addText}> + </Text>
           </View>
         </TouchableOpacity>
       </KeyboardAvoidingView>
-
-
-
-
-    </View>
+    </SafeAreaView >
   );
 }
 
@@ -74,14 +67,18 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#E8EAED',
+    paddingTop: StatusBar.currentHeight
   },
   tasksWrapper: {
-    paddingTop: 80,
+    paddingTop: 10,
     paddingHorizontal: 20,
+    marginHorizontal: 5
   },
   sectionTitle: {
     fontSize: 24,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    paddingVertical: 20,
+    paddingHorizontal: 20
   },
   items: {
     marginTop: 30
